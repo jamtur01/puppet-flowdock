@@ -17,6 +17,8 @@ Puppet::Reports.register_report(:flowdock) do
   raise(Puppet::ParseError, "Flowdock report config file #{configfile} not readable") unless File.exist?(configfile)
   @config = YAML.load_file(configfile)
 
+  API_KEY =  @config[:flowdock_api_key]
+
   desc <<-DESC
   Send notification of failed reports to Flowdock.
   DESC
@@ -29,7 +31,7 @@ Puppet::Reports.register_report(:flowdock) do
       end
 
       # create a new Flow object with API Token and sender information
-      flow = Flowdock::Flow.new(:api_token => @config[:flowdock_api_key],
+      flow = Flowdock::Flow.new(:api_token => API_KEY,
         :source => "Puppet",
         :from => {:name => "Puppet master", :address => "puppet@yourdomain.com"})
 
