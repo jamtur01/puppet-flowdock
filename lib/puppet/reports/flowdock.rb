@@ -1,6 +1,5 @@
 require 'puppet'
 require 'yaml'
-require 'json'
 
 begin
   require 'flowdock'
